@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="t-title">Diamond Reward Event</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: 'Poppins', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: radial-gradient(circle at center, #180036 0%, #050014 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* ব্যাকগ্রাউন্ড ডাইনামিক লাইটিং গ্লো */
+        .bg-glow-1 {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: #ff007f;
+            filter: blur(140px);
+            border-radius: 50%;
+            top: 5%;
+            left: 5%;
+            animation: pulseGlow 6s infinite alternate;
+        }
+        .bg-glow-2 {
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            background: #00d2ff;
+            filter: blur(140px);
+            border-radius: 50%;
+            bottom: 5%;
+            right: 5%;
+            animation: pulseGlow 8s infinite alternate-reverse;
+        }
+
+        @keyframes pulseGlow {
+            0% { transform: scale(1); opacity: 0.6; }
+            100% { transform: scale(1.3); opacity: 0.9; }
+        }
+
+        /* গ্লাস-মরফিজম কার্ড ও ডাইনামিক বর্ডার */
+        .container {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 440px;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 24px;
+            padding: 30px 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            color: #ffffff;
+            overflow: hidden;
+        }
+
+        /* ডাইনামিক রেইনবো বর্ডার অ্যানিমেশন */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, #ff007f, #00d2ff, #ffeaa7, transparent 30%);
+            animation: rotateBorder 6s linear infinite;
+            z-index: -2;
+        }
+        .container::after {
+            content: '';
+            position: absolute;
+            inset: 3px;
+            background: #0d031c;
+            border-radius: 22px;
+            z-index: -1;
+        }
+
+        @keyframes rotateBorder {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .translate-box {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+        .translate-box select {
+            padding: 6px 12px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-size: 12px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #ffeaa7;
+            cursor: pointer;
+            outline: none;
+            backdrop-filter: blur(5px);
+            font-weight: 600;
+        }
+        .translate-box select option {
+            background: #180036;
+            color: #fff;
+        }
+
+        .header {
+            text-align: center;
+            margin-top: 15px;
+            margin-bottom: 22px;
+        }
+        h2 {
+            background: linear-gradient(45deg, #ff007f, #ffeaa7, #00d2ff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 8px;
+            animation: shineText 3s linear infinite;
+        }
+
+        @keyframes shineText {
+            to { background-position: 200% center; }
+        }
+
+        p.instruction {
+            font-size: 13.5px;
+            color: #dfe6e9;
+            line-height: 1.4;
+        }
+
+        .store-btn-container {
+            text-align: center;
+            margin: 22px 0;
+        }
+        .store-btn {
+            position: relative;
+            display: block;
+            background: linear-gradient(45deg, #00b894, #00cec9);
+            color: #ffffff;
+            padding: 14px 20px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 15px;
+            box-shadow: 0 0 20px rgba(0, 206, 201, 0.5);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+        }
+        /* শাইনিং ইফেক্ট বোতামে */
+        .store-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: rgba(255, 255, 255, 0.2);
+            transform: rotate(30deg) translateY(-100%);
+            animation: shineSweep 4s infinite;
+        }
+
+        @keyframes shineSweep {
+            0% { transform: rotate(30deg) translateY(-100%); }
+            20% { transform: rotate(30deg) translateY(100%); }
+            100% { transform: rotate(30deg) translateY(100%); }
+        }
+
+        .store-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 30px rgba(0, 206, 201, 0.8);
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+        label {
+            display: block;
+            margin-bottom: 6px;
+            color: #ffeaa7;
+            font-weight: 600;
+            font-size: 13.5px;
+            letter-spacing: 0.3px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="file"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            font-size: 14px;
+            background: rgba(255, 255, 255, 0.06);
+            color: #ffffff;
+            outline: none;
+            transition: all 0.3s ease;
+        }
+        input[type="file"] {
+            padding: 8px;
+            cursor: pointer;
+        }
+        input::placeholder {
+            color: #a0a0a0;
+        }
+        input:focus {
+            border-color: #00d2ff;
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 0 15px rgba(0, 210, 255, 0.6);
+        }
+
+        .notice-box {
+            background: rgba(255, 118, 117, 0.15);
+            border-left: 4px solid #ff7675;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 12px;
+            color: #ff7675;
+            margin-top: 8px;
+            font-weight: 500;
+            line-height: 1.5;
+            box-shadow: 0 0 10px rgba(255, 118, 117, 0.2);
+        }
+
+        button.submit-btn {
+            position: relative;
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #ff007f, #7000ff);
+            color: white;
+            border: none;
+            border-radius: 14px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 0, 127, 0.6);
+            margin-top: 12px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            overflow: hidden;
+        }
+        button.submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 35px rgba(255, 0, 127, 0.9);
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+
+<div class="container">
+    <!-- Translate Dropdown -->
+    <div class="translate-box">
+        <select id="languageSelect" onchange="changeLanguage()">
+            <option value="en">English</option>
+            <option value="bn">বাংলা</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ar">العربية</option>
+        </select>
+    </div>
+
+    <div class="header">
+        <h2 id="t-heading">💎 Diamond Bonus Event 💎</h2>
+        <p class="instruction" id="t-subtext">Give a 5-star review on the Play Store and win 50 Diamonds!</p>
+    </div>
+
+    <!-- Play Store Link Button -->
+    <div class="store-btn-container">
+        <a href="https://play.google.com/store/apps/details?id=com.quantumdesign.emochat" target="_blank" class="store-btn" id="t-btn">⭐ Give Review on Play Store</a>
+    </div>
+
+    <form id="rewardForm" onsubmit="sendToWhatsApp(event)">
+        
+        <div class="form-group">
+            <label for="username" id="t-label-name">Your Name:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your name" required>
+        </div>
+
+        <div class="form-group">
+            <label for="userid" id="t-label-id">User ID (Max 6 Digits):</label>
+            <input type="text" id="userid" name="userid" placeholder="e.g. 123456" maxlength="6" pattern="\d{1,6}" title="Enter up to 6 digits" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email" id="t-label-email">Email Address:</label>
+            <input type="email" id="email" name="email" placeholder="example@gmail.com" required>
+        </div>
+
+        <div class="form-group">
+            <label for="screenshot" id="t-label-file">Review Screenshot File:</label>
+            <input type="file" id="screenshot" name="screenshot" accept="image/*" required>
+            <div class="notice-box" id="t-notice">
+                ⚠️ Strict Rule: Only 1 submission is allowed per device and email address! Giving a nice review and uploading its screenshot is mandatory.
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn" id="t-submit">Send to WhatsApp</button>
+    </form>
+</div>
+
+<script>
+    const translations = {
+        en: {
+            title: "Diamond Reward Event",
+            heading: "💎 Diamond Bonus Event 💎",
+            subtext: "Give a 5-star review on the Play Store and win 50 Diamonds!",
+            btnText: "⭐ Give Review on Play Store",
+            labelName: "Your Name:",
+            labelId: "User ID (Max 6 Digits):",
+            labelEmail: "Email Address:",
+            labelFile: "Review Screenshot File:",
+            notice: "⚠️ Strict Rule: Only 1 submission is allowed per device and email address! Giving a nice review and uploading its screenshot is mandatory.",
+            submitBtn: "Send to WhatsApp",
+            placeholderName: "Enter your name",
+            placeholderId: "e.g. 123456",
+            alertId: "User ID cannot be more than 6 digits!",
+            alertDuplicate: "⚠️ Error: You have already submitted using this email or device!",
+            msgHeader: "Hello Admin,\n\nI have reviewed on the Play Store. Here are my details:",
+            msgName: "👤 Name:",
+            msgId: "🆔 User ID:",
+            msgEmail: "📧 Email:",
+            msgInstruction: "📸 ATTACHMENT INSTRUCTION:\nPlease attach your review screenshot from your gallery before sending this message."
+        },
+        bn: {
+            title: "ডায়মন্ড রিওয়ার্ড ইভেন্ট",
+            heading: "💎 ডায়মন্ড বোনাস ইভেন্ট 💎",
+            subtext: "প্লে স্টোরে অ্যাপটিতে ৫-স্টার রিভিউ দিয়ে জিতে নিন ৫০টি ডায়মন্ড!",
+            btnText: "⭐ প্লে স্টোরে রিভিউ দিন",
+            labelName: "আপনার নাম:",
+            labelId: "ইউজার আইডি (সর্বোচ্চ ৬ ডিজিট):",
+            labelEmail: "ইমেইল ঠিকানা:",
+            labelFile: "রিভিউয়ের স্ক্রিনশট ফাইল:",
+            notice: "⚠️ কঠোর নিয়ম: একটি ডিভাইস এবং ইমেইল থেকে মাত্র ১ বারই আবেদন করা যাবে! রিভিউ ও স্ক্রিনশট দেওয়া সম্পূর্ণ বাধ্যতামূলক।",
+            submitBtn: "হোয়াটসঅ্যাপে পাঠান",
+            placeholderName: "আপনার নাম লিখুন",
+            placeholderId: "যেমন: 123456",
+            alertId: "ইউজার আইডি ৬ ডিজিটের বেশি হতে পারবে না!",
+            alertDuplicate: "⚠️ ভুল: এই ইমেইল বা ডিভাইস থেকে ইতিপূর্বে আবেদন করা হয়েছে!",
+            msgHeader: "হ্যালো অ্যাডমিন,\n\nআমি প্লে স্টোরে রিভিউ দিয়েছি। আমার তথ্যসমূহ নিচে দেওয়া হলো:",
+            msgName: "👤 নাম:",
+            msgId: "🆔 ইউজার আইডি:",
+            msgEmail: "📧 ইমেইল:",
+            msgInstruction: "📸 অ্যাটাচমেন্ট নির্দেশনা:\nমেসেজটি পাঠানোর আগে অনুগ্রহ করে গ্যালারি থেকে রিভিউয়ের স্ক্রিনশটটি সাথে যুক্ত করুন।"
+        },
+        hi: {
+            title: "डायमंड रिवॉर्ड इवेंट",
+            heading: "💎 डायमंड बोनस इवेंट 💎",
+            subtext: "प्ले स्टोर पर 5-स्टार समीक्षा दें और 50 डायमंड प्राप्त करें!",
+            btnText: "⭐ प्ले स्टोर पर समीक्षा दें",
+            labelName: "आपका नाम:",
+            labelId: "यूज़र आईडी (अधिकतम 6 अंक):",
+            labelEmail: "ईमेल आईडी:",
+            labelFile: "समीक्षा का स्क्रीनशॉट फ़ाइल:",
+            notice: "⚠️ सख्त नियम: प्रति डिवाइस और ईमेल केवल 1 बार सबमिशन की अनुमति है! समीक्षा और स्क्रीनशॉट अनिवार्य है।",
+            submitBtn: "व्हाट्सएप पर भेजें",
+            placeholderName: "अपना नाम दर्ज करें",
+            placeholderId: "जैसे: 123456",
+            alertId: "यूज़र आईडी 6 अंकों से अधिक नहीं हो सकती!",
+            alertDuplicate: "⚠️ त्रुटि: इस ईमेल या डिवाइस से पहले ही सबमिट किया जा चुका है!",
+            msgHeader: "हेलो एडमिन,\n\nमैंने प्ले स्टोर पर समीक्षा दी है। मेरा विवरण निम्नलिखित है:",
+            msgName: "👤 नाम:",
+            msgId: "🆔 यूज़र आईडी:",
+            msgEmail: "📧 ईमेल:",
+            msgInstruction: "📸 अटैचमेंट निर्देश:\nकृपया यह संदेश भेजने से पहले अपनी गैलरी से समीक्षा का स्क्रीनशॉट संलग्न करें।"
+        },
+        ar: {
+            title: "حدث مكافأة الماس",
+            heading: "💎 حدث مكافأة الماس 💎",
+            subtext: "أعط تقييمًا ب5 نجوم على متجر بلاي واحصل على 50 ماسة!",
+            btnText: "⭐ تقييم على متجر بلاي",
+            labelName: "اسمك:",
+            labelId: "معرف المستخدم (أقصى حد 6 أرقام):",
+            labelEmail: "بريدك الإلكتروني:",
+            labelFile: "ملف لقطة شاشة التقييم:",
+            notice: "⚠️ قاعدة صارمة: يُسمح بإرسال طلب واحد فقط لكل جهاز وبريد إلكتروني! تقديم التقييم ولقطة الشاشة إلزامي.",
+            submitBtn: "إرسال إلى واتساب",
+            placeholderName: "أدخل اسمك",
+            placeholderId: "مثال: 123456",
+            alertId: "معرف المستخدم لا يمكن أن يكون أكثر من 6 أرقام!",
+            alertDuplicate: "⚠️ خطأ: لقد قمت بالفعل بالإرسال باستخدام هذا البريد الإلكتروني أو الجهاز!",
+            msgHeader: "مرحبًا مسؤول,\n\nلقد قمت بالتقييم على متجر بلاي. تفاصيلي أدناه:",
+            msgName: "👤 الاسم:",
+            msgId: "🆔 معرف المستخدم:",
+            msgEmail: "📧 البريد الإلكتروني:",
+            msgInstruction: "📸 تعليمات المرفق:\nيرجى إرفاق لقطة شاشة التقييم من المعرض قبل إرسال هذه الرسالة."
+        }
+    };
+
+    let currentLang = 'en';
+
+    function changeLanguage() {
+        const select = document.getElementById('languageSelect');
+        currentLang = select.value;
+        const t = translations[currentLang];
+
+        document.getElementById('t-title').innerText = t.title;
+        document.getElementById('t-heading').innerText = t.heading;
+        document.getElementById('t-subtext').innerText = t.subtext;
+        document.getElementById('t-btn').innerText = t.btnText;
+        document.getElementById('t-label-name').innerText = t.labelName;
+        document.getElementById('t-label-id').innerText = t.labelId;
+        document.getElementById('t-label-email').innerText = t.labelEmail;
+        document.getElementById('t-label-file').innerText = t.labelFile;
+        document.getElementById('t-notice').innerText = t.notice;
+        document.getElementById('t-submit').innerText = t.submitBtn;
+
+        document.getElementById('username').placeholder = t.placeholderName;
+        document.getElementById('userid').placeholder = t.placeholderId;
+
+        if (currentLang === 'ar') {
+            document.body.style.direction = 'rtl';
+        } else {
+            document.body.style.direction = 'ltr';
+        }
+    }
+
+    function sendToWhatsApp(event) {
+        event.preventDefault(); 
+
+        let name = document.getElementById('username').value;
+        let userid = document.getElementById('userid').value;
+        let email = document.getElementById('email').value;
+        let t = translations[currentLang];
+
+        if (userid.length > 6) {
+            alert(t.alertId);
+            return;
+        }
+
+        let submittedEmails = JSON.parse(localStorage.getItem('submitted_emails')) || [];
+        let deviceSubmitted = localStorage.getItem('device_submitted');
+
+        if (submittedEmails.includes(email) || deviceSubmitted === 'true') {
+            alert(t.alertDuplicate);
+            return;
+        }
+
+        submittedEmails.push(email);
+        localStorage.setItem('submitted_emails', JSON.stringify(submittedEmails));
+        localStorage.setItem('device_submitted', 'true');
+
+        // আপনার যুক্ত করা আসল হোয়াটসঅ্যাপ ফোন নম্বর (ইতালি কান্ট্রি কোড সহ)
+        let adminPhoneNumber = "393280293585"; 
+
+        // মেসেজ ফরম্যাট
+        let message = `${t.msgHeader}\n\n${t.msgName} ${name}\n${t.msgId} ${userid}\n${t.msgEmail} ${email}\n\n-------------------------\n${t.msgInstruction}`;
+
+        let encodedMessage = encodeURIComponent(message);
+
+        // হোয়াটসঅ্যাপ ডিরেক্ট রিডাইরেক্ট লিঙ্ক
+        let whatsappUrl = `https://wa.me/${adminPhoneNumber}?text=${encodedMessage}`;
+
+        window.location.href = whatsappUrl;
+    }
+</script>
+
+</body>
+</html>
